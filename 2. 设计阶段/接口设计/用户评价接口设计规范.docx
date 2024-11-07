@@ -1,0 +1,65 @@
+用户评价接口设计规范.docx
+\---------------------
+
+# 用户评价接口设计规范
+
+## 1. 引言
+本文档规定了电商应用用户评价接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/products/{product_id}/reviews
+- **请求方法**：POST
+
+## 3. 请求参数
+- **product_id** (int): 商品ID，必填
+- **rating** (int): 评分，必填（通常为1-5）
+- **comment** (string): 评论内容，可选
+
+## 4. 请求示例
+```
+POST /api/v1/products/123/reviews
+Content-Type: application/json
+
+{
+  "rating": 5,
+  "comment": "Great product, highly recommended!"
+}
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：201 Created
+  - 响应体：
+    ```json
+    {
+      "message": "Review submitted successfully",
+      "data": {
+        "review_id": 1,
+        "user_id": 123,
+        "product_id": 123,
+        "rating": 5,
+        "comment": "Great product, highly recommended!",
+        "created_at": "2023-04-01T12:34:56Z"
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Rating must be between 1 and 5"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能对已购买的商品进行评价。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

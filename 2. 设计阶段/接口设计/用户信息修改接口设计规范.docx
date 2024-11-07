@@ -1,0 +1,67 @@
+用户信息修改接口设计规范.docx
+\---------------------
+
+# 用户信息修改接口设计规范
+
+## 1. 引言
+本文档规定了电商应用用户信息修改接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/users/{user_id}/update
+- **请求方法**：PUT
+
+## 3. 请求参数
+- **user_id** (int): 用户ID，必填
+- **username** (string): 用户名，可选
+- **email** (string): 邮箱，可选
+- **phone** (string): 手机号，可选
+- **password** (string): 密码，可选（仅当密码为空时，才允许修改）
+
+## 4. 请求示例
+```
+PUT /api/v1/users/123/update
+Content-Type: application/json
+
+{
+  "username": "new_username",
+  "email": "new_email@example.com",
+  "phone": "1234567890",
+  "password": "new_secure_password"
+}
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "User information updated successfully",
+      "data": {
+        "user_id": 123,
+        "username": "new_username",
+        "email": "new_email@example.com",
+        "phone": "1234567890"
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Username or email already exists"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能修改自己的信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

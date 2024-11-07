@@ -1,0 +1,63 @@
+订单创建接口设计规范.docx
+\---------------------
+
+# 订单创建接口设计规范
+
+## 1. 引言
+本文档规定了电商应用订单创建接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/orders
+- **请求方法**：POST
+
+## 3. 请求参数
+- **购物车ID** (int): 购物车ID，必填
+- **收货地址** (string): 收货地址，必填
+- **支付方式** (string): 支付方式，必填
+
+## 4. 请求示例
+```
+POST /api/v1/orders
+Content-Type: application/json
+
+{
+  "cart_id": 456,
+  "shipping_address": "123 Main St, Anytown, AN",
+  "payment_method": "credit_card"
+}
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：201 Created
+  - 响应体：
+    ```json
+    {
+      "message": "Order created successfully",
+      "data": {
+        "order_id": 789,
+        "status": "pending",
+        "created_at": "2023-04-01T12:34:56Z"
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Invalid cart ID or payment method"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能创建自己的订单。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

@@ -1,0 +1,57 @@
+商品详情接口设计规范.docx
+\---------------------
+
+# 商品详情接口设计规范
+
+## 1. 引言
+本文档规定了电商应用商品详情接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/products/{product_id}
+- **请求方法**：GET
+
+## 3. 请求参数
+- **product_id** (int): 商品ID，必填
+
+## 4. 请求示例
+```
+GET /api/v1/products/123
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Product details retrieved successfully",
+      "data": {
+        "product_id": 123,
+        "name": "Product Name",
+        "description": "Product description here...",
+        "price": 100.00,
+        "stock": 20,
+        "category_id": 1,
+        "image_url": "http://example.com/product_image.jpg"
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：404 Not Found
+  - 响应体：
+    ```json
+    {
+      "error": "Product not found",
+      "message": "The requested product does not exist"
+    }
+    ```
+
+## 6. 错误码
+- 404 Not Found：请求的商品不存在。
+
+## 7. 安全性
+- 无特殊安全性要求，但应确保接口的稳定性。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

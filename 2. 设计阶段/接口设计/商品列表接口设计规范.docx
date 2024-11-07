@@ -1,0 +1,65 @@
+商品列表接口设计规范.docx
+\---------------------
+
+# 商品列表接口设计规范
+
+## 1. 引言
+本文档规定了电商应用商品列表接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/products
+- **请求方法**：GET
+
+## 3. 请求参数
+- **page** (int): 当前页码，默认为1
+- **limit** (int): 每页显示的商品数量，默认为10
+- **category_id** (int): 商品分类ID，可选，用于筛选特定分类的商品
+
+## 4. 请求示例
+```
+GET /api/v1/products?page=1&limit=10&category_id=1
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Product list retrieved successfully",
+      "data": {
+        "products": [
+          {
+            "product_id": 1,
+            "name": "Product 1",
+            "price": 100.00,
+            "stock": 20,
+            "category_id": 1
+          },
+          // ... more products
+        ],
+        "page": 1,
+        "limit": 10,
+        "total": 100
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Invalid page or limit value"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 无特殊安全性要求，但应确保接口的稳定性。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

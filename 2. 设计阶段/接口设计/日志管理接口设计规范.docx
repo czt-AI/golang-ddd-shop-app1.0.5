@@ -1,0 +1,62 @@
+日志管理接口设计规范.docx
+\---------------------
+
+# 日志管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用日志管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/admin/logs
+- **请求方法**：GET
+
+## 3. 请求参数
+- **start_time** (datetime): 开始时间，可选
+- **end_time** (datetime): 结束时间，可选
+- **user_id** (int): 用户ID，可选
+- **action_type** (string): 操作类型，可选
+
+## 4. 请求示例
+```
+GET /api/v1/admin/logs?start_time=2023-04-01T00:00:00&end_time=2023-04-30T23:59:59&user_id=123&action_type=login
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Logs retrieved successfully",
+      "data": [
+        {
+          "log_id": 1,
+          "timestamp": "2023-04-01T12:34:56Z",
+          "user_id": 123,
+          "action_type": "login",
+          "details": "User logged in successfully"
+        }
+        // ... more logs
+      ]
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Invalid date format"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行管理员身份验证。
+- 确保管理员只能管理日志信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

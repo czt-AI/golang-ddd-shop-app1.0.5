@@ -1,0 +1,87 @@
+用户地址管理接口设计规范.docx
+\---------------------
+
+# 用户地址管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用用户地址管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/users/{user_id}/addresses
+- **请求方法**：GET, POST, PUT, DELETE
+
+## 3. 请求参数
+- **user_id** (int): 用户ID，必填
+- **address_id** (int): 地址ID，可选（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 获取用户地址列表
+```
+GET /api/v1/users/123/addresses
+```
+
+### 添加新地址
+```
+POST /api/v1/users/123/addresses
+Content-Type: application/json
+
+{
+  "recipient_name": "John Doe",
+  "recipient_phone": "1234567890",
+  "address_details": "456 Elm St, Anytown, AN",
+  "postal_code": "12345",
+  "is_default": 0
+}
+```
+
+### 更新地址
+```
+PUT /api/v1/users/123/addresses/456
+Content-Type: application/json
+
+{
+  "recipient_name": "John Doe",
+  "recipient_phone": "1234567890",
+  "address_details": "456 Elm St, Anytown, AN",
+  "postal_code": "12345",
+  "is_default": 1
+}
+```
+
+### 删除地址
+```
+DELETE /api/v1/users/123/addresses/456
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Address ID is required"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能管理自己的地址。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

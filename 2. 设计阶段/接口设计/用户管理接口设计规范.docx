@@ -1,0 +1,82 @@
+用户管理接口设计规范.docx
+\---------------------
+
+# 用户管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用用户管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/admin/users
+- **请求方法**：GET, POST, PUT, DELETE
+
+## 3. 请求参数
+- **user_id** (int): 用户ID，可选（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 获取用户列表
+```
+GET /api/v1/admin/users
+```
+
+### 添加新用户
+```
+POST /api/v1/admin/users
+Content-Type: application/json
+
+{
+  "username": "new_user",
+  "password": "new_secure_password",
+  "email": "new_user@example.com",
+  "phone": "1234567890"
+}
+```
+
+### 更新用户信息
+```
+PUT /api/v1/admin/users/123
+Content-Type: application/json
+
+{
+  "username": "updated_user",
+  "email": "updated_user@example.com"
+}
+```
+
+### 删除用户
+```
+DELETE /api/v1/admin/users/123
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "User ID is required"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行管理员身份验证。
+- 确保管理员只能管理用户信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

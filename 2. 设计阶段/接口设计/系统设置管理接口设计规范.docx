@@ -1,0 +1,79 @@
+系统设置管理接口设计规范.docx
+\---------------------
+
+# 系统设置管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用系统设置管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/admin/settings
+- **请求方法**：GET, POST, PUT, DELETE
+
+## 3. 请求参数
+- **setting_name** (string): 设置名称，可选（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 获取系统设置列表
+```
+GET /api/v1/admin/settings
+```
+
+### 添加新系统设置
+```
+POST /api/v1/admin/settings
+Content-Type: application/json
+
+{
+  "setting_name": "order_notification",
+  "setting_value": "true"
+}
+```
+
+### 更新系统设置
+```
+PUT /api/v1/admin/settings/order_notification
+Content-Type: application/json
+
+{
+  "setting_value": "false"
+}
+```
+
+### 删除系统设置
+```
+DELETE /api/v1/admin/settings/order_notification
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Setting name is required"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行管理员身份验证。
+- 确保管理员只能管理系统设置。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

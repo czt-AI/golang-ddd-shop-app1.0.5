@@ -1,0 +1,80 @@
+品牌商品关联管理接口设计规范.docx
+\---------------------
+
+# 品牌商品关联管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用品牌与商品关联管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/admin/brand_products
+- **请求方法**：GET, POST, PUT, DELETE
+
+## 3. 请求参数
+- **association_id** (int): 关联ID，可选（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 获取品牌商品关联列表
+```
+GET /api/v1/admin/brand_products
+```
+
+### 添加品牌商品关联
+```
+POST /api/v1/admin/brand_products
+Content-Type: application/json
+
+{
+  "brand_id": 1,
+  "product_id": 123
+}
+```
+
+### 更新品牌商品关联
+```
+PUT /api/v1/admin/brand_products/1
+Content-Type: application/json
+
+{
+  "brand_id": 1,
+  "product_id": 456
+}
+```
+
+### 删除品牌商品关联
+```
+DELETE /api/v1/admin/brand_products/1
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Association ID is required"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行管理员身份验证。
+- 确保管理员只能管理品牌与商品的关联信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

@@ -1,0 +1,65 @@
+物流信息查询接口设计规范.docx
+\---------------------
+
+# 物流信息查询接口设计规范
+
+## 1. 引言
+本文档规定了电商应用物流信息查询接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/orders/{order_id}/logistics
+- **请求方法**：GET
+
+## 3. 请求参数
+- **order_id** (int): 订单ID，必填
+
+## 4. 请求示例
+```
+GET /api/v1/orders/789/logistics
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Logistics information retrieved successfully",
+      "data": {
+        "tracking_number": "LP123456789",
+        "status": "in_transit",
+        "estimated_delivery": "2023-04-10",
+        "details": [
+          {
+            "date": "2023-04-01",
+            "status": "shipped"
+          },
+          {
+            "date": "2023-04-02",
+            "status": "in_transit"
+          }
+          // ... more details
+        ]
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：404 Not Found
+  - 响应体：
+    ```json
+    {
+      "error": "Order not found",
+      "message": "The requested order does not exist"
+    }
+    ```
+
+## 6. 错误码
+- 404 Not Found：请求的订单不存在。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能查询自己的订单的物流信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

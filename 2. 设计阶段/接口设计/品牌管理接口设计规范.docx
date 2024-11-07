@@ -1,0 +1,82 @@
+品牌管理接口设计规范.docx
+\---------------------
+
+# 品牌管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用品牌管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/admin/brands
+- **请求方法**：GET, POST, PUT, DELETE
+
+## 3. 请求参数
+- **brand_id** (int): 品牌ID，可选（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 获取品牌列表
+```
+GET /api/v1/admin/brands
+```
+
+### 添加新品牌
+```
+POST /api/v1/admin/brands
+Content-Type: application/json
+
+{
+  "brand_name": "New Brand",
+  "description": "Description of the new brand...",
+  "image_url": "http://example.com/brand_image.jpg",
+  "website": "http://example.com/brand"
+}
+```
+
+### 更新品牌信息
+```
+PUT /api/v1/admin/brands/1
+Content-Type: application/json
+
+{
+  "brand_name": "Updated Brand",
+  "description": "Updated description..."
+}
+```
+
+### 删除品牌
+```
+DELETE /api/v1/admin/brands/1
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Brand ID is required"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行管理员身份验证。
+- 确保管理员只能管理品牌信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

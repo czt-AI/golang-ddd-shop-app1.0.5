@@ -1,0 +1,59 @@
+用户浏览历史管理接口设计规范.docx
+\---------------------
+
+# 用户浏览历史管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用用户浏览历史管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/users/{user_id}/browsing_history
+- **请求方法**：GET, DELETE
+
+## 3. 请求参数
+- **user_id** (int): 用户ID，必填
+- **product_id** (int): 商品ID，可选（仅用于删除操作）
+
+## 4. 请求示例
+### 获取用户浏览历史
+```
+GET /api/v1/users/123/browsing_history
+```
+
+### 删除浏览历史
+```
+DELETE /api/v1/users/123/browsing_history/456
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Product ID is required for deletion"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能管理自己的浏览历史。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

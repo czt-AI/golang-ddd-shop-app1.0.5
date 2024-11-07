@@ -1,0 +1,99 @@
+购物车接口设计规范.docx
+\---------------------
+
+# 购物车接口设计规范
+
+## 1. 引言
+本文档规定了电商应用购物车接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **添加商品到购物车**：
+  - **接口名称**：/api/v1/carts/add
+  - **请求方法**：POST
+- **获取购物车列表**：
+  - **接口名称**：/api/v1/carts
+  - **请求方法**：GET
+- **更新购物车商品数量**：
+  - **接口名称**：/api/v1/carts/update
+  - **请求方法**：PUT
+- **删除购物车商品**：
+  - **接口名称**：/api/v1/carts/remove
+  - **请求方法**：DELETE
+
+## 3. 请求参数
+- **商品ID** (int): 商品ID，必填
+- **数量** (int): 商品数量，必填（仅用于添加和更新操作）
+- **购物车ID** (int): 购物车ID，必填（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 添加商品到购物车
+```
+POST /api/v1/carts/add
+Content-Type: application/json
+
+{
+  "product_id": 123,
+  "quantity": 1
+}
+```
+
+### 获取购物车列表
+```
+GET /api/v1/carts
+```
+
+### 更新购物车商品数量
+```
+PUT /api/v1/carts/update
+Content-Type: application/json
+
+{
+  "cart_id": 456,
+  "product_id": 123,
+  "quantity": 2
+}
+```
+
+### 删除购物车商品
+```
+DELETE /api/v1/carts/remove
+Content-Type: application/json
+
+{
+  "cart_id": 456,
+  "product_id": 123
+}
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Invalid product ID or quantity"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能操作自己的购物车。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

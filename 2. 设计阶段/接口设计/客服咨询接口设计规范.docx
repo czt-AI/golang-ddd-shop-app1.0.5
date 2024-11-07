@@ -1,0 +1,63 @@
+客服咨询接口设计规范.docx
+\---------------------
+
+# 客服咨询接口设计规范
+
+## 1. 引言
+本文档规定了电商应用客服咨询接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/support/tickets
+- **请求方法**：POST
+
+## 3. 请求参数
+- **user_id** (int): 用户ID，必填
+- **message** (string): 咨询内容，必填
+
+## 4. 请求示例
+```
+POST /api/v1/support/tickets
+Content-Type: application/json
+
+{
+  "user_id": 123,
+  "message": "I have a question about my order."
+}
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：201 Created
+  - 响应体：
+    ```json
+    {
+      "message": "Support ticket created successfully",
+      "data": {
+        "ticket_id": 1,
+        "user_id": 123,
+        "message": "I have a question about my order.",
+        "status": "open",
+        "created_at": "2023-04-01T12:34:56Z"
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "User ID or message cannot be empty"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能提交自己的咨询。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

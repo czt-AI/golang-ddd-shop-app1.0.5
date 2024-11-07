@@ -1,0 +1,68 @@
+订单管理接口设计规范.docx
+\---------------------
+
+# 订单管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用订单管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/admin/orders
+- **请求方法**：GET, PUT, DELETE
+
+## 3. 请求参数
+- **order_id** (int): 订单ID，可选（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 获取订单列表
+```
+GET /api/v1/admin/orders
+```
+
+### 更新订单状态
+```
+PUT /api/v1/admin/orders/123
+Content-Type: application/json
+
+{
+  "status": "shipped"
+}
+```
+
+### 删除订单
+```
+DELETE /api/v1/admin/orders/123
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Order ID is required"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行管理员身份验证。
+- 确保管理员只能管理订单信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

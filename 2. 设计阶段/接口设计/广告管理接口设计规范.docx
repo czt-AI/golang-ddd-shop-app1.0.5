@@ -1,0 +1,89 @@
+广告管理接口设计规范.docx
+\---------------------
+
+# 广告管理接口设计规范
+
+## 1. 引言
+本文档规定了电商应用广告管理接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/admin/ads
+- **请求方法**：GET, POST, PUT, DELETE
+
+## 3. 请求参数
+- **ad_id** (int): 广告ID，可选（仅用于更新和删除操作）
+
+## 4. 请求示例
+### 获取广告列表
+```
+GET /api/v1/admin/ads
+```
+
+### 添加新广告
+```
+POST /api/v1/admin/ads
+Content-Type: application/json
+
+{
+  "ad_name": "New Ad",
+  "image_url": "http://example.com/new_ad.jpg",
+  "link_url": "http://example.com/ads/1",
+  "start_time": "2023-04-01T00:00:00",
+  "end_time": "2023-04-30T23:59:59",
+  "position": "header",
+  "display_count": 0,
+  "click_count": 0
+}
+```
+
+### 更新广告信息
+```
+PUT /api/v1/admin/ads/1
+Content-Type: application/json
+
+{
+  "ad_name": "Updated Ad",
+  "image_url": "http://example.com/updated_ad.jpg",
+  "link_url": "http://example.com/ads/1",
+  "start_time": "2023-04-01T00:00:00",
+  "end_time": "2023-04-30T23:59:59"
+}
+```
+
+### 删除广告
+```
+DELETE /api/v1/admin/ads/1
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Operation successful",
+      "data": {
+        // ... 根据操作类型返回不同的数据
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid input",
+      "message": "Ad ID is required"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的输入参数。
+
+## 7. 安全性
+- 使用JWT进行管理员身份验证。
+- 确保管理员只能管理广告信息。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。

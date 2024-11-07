@@ -1,0 +1,58 @@
+支付接口设计规范.docx
+\---------------------
+
+# 支付接口设计规范
+
+## 1. 引言
+本文档规定了电商应用支付接口的设计规范，包括接口定义、请求参数、响应格式和错误码。
+
+## 2. 接口定义
+- **接口名称**：/api/v1/orders/{order_id}/pay
+- **请求方法**：POST
+
+## 3. 请求参数
+- **order_id** (int): 订单ID，必填
+- **payment_method** (string): 支付方式，必填
+
+## 4. 请求示例
+```
+POST /api/v1/orders/789/pay
+Content-Type: application/json
+
+{
+  "payment_method": "alipay"
+}
+```
+
+## 5. 响应格式
+- **成功响应**：
+  - 状态码：200 OK
+  - 响应体：
+    ```json
+    {
+      "message": "Payment initiated successfully",
+      "data": {
+        "payment_url": "https://payment.alipay.com/pay"
+      }
+    }
+    ```
+- **错误响应**：
+  - 状态码：400 Bad Request
+  - 响应体：
+    ```json
+    {
+      "error": "Invalid payment method",
+      "message": "The selected payment method is not supported"
+    }
+    ```
+
+## 6. 错误码
+- 400 Bad Request：无效的支付方式。
+
+## 7. 安全性
+- 使用JWT进行用户身份验证。
+- 确保用户只能支付自己的订单。
+
+\---------------------
+
+请注意，这是一个示例文件内容，实际接口设计规范需要根据具体的项目需求和设计规范进行撰写。
