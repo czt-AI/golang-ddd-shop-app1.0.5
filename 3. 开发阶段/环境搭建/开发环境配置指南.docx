@@ -1,0 +1,27 @@
+package main
+
+import (
+    "database/sql"
+    "fmt"
+    "log"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+var db *sql.DB
+
+func init() {
+    var err error
+    db, err = sql.Open("mysql", "user:password@/dbname")
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 确保数据库连接是活跃的
+    err = db.Ping()
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("Database connected!")
+}
