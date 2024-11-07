@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  web:
+    image: shop-app-web:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - /path/to/shop-app:/shop-app
+    networks:
+      - shop-app-network
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: shop_app_db
+      MYSQL_USER: shop_app_user
+      MYSQL_PASSWORD: shop_app_password
+    volumes:
+      - /path/to/shop-app/db:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - /path/to/shop-app/redis:/data
+
+networks:
+  shop-app-network:
+    driver: bridge

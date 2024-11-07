@@ -1,0 +1,49 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+
+scrape_configs:
+  - job_name: 'shop-app'
+    static_configs:
+      - targets: ['shop-app:9090']
+    metrics_path: '/metrics'
+    params:
+      job: 'shop-app'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'shop-app'
+
+  - job_name: 'shop-app-web'
+    static_configs:
+      - targets: ['shop-app-web:8080']
+    metrics_path: '/metrics'
+    params:
+      job: 'shop-app-web'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'shop-app-web'
+
+  - job_name: 'shop-app-db'
+    static_configs:
+      - targets: ['shop-app-db:3306']
+    metrics_path: '/metrics'
+    params:
+      job: 'shop-app-db'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'shop-app-db'
+
+  - job_name: 'shop-app-redis'
+    static_configs:
+      - targets: ['shop-app-redis:6379']
+    metrics_path: '/metrics'
+    params:
+      job: 'shop-app-redis'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'shop-app-redis'
